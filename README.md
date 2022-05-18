@@ -59,9 +59,9 @@ https://www.fluentd.org/plugins/all
  
 El archivo de configuración de fluentd trabaja con una sintaxis de etiquetas en donde se definen las entradas, filtros y destinos.
  
-Por Ejemplo:
+Ejemplo:
  
-```
+```aconf
 <source>
 ...
 </source>
@@ -108,7 +108,7 @@ Por ejemplo:
  
 Esto nos permite utilizar una directiva **match** de tipo **sentry**.
  
-```
+```aconf
 <match notify.**>
   @type sentry
  
@@ -153,23 +153,23 @@ Ofrece un repositorio donde se encuentran todos los archivos necesarios para la 
  
 1. Clonar el repositorio de sentry self-hosted
  
-    `git clone https://github.com/getsentry/self-hosted.git`
+    `$ git clone https://github.com/getsentry/self-hosted.git`
  
 2. Ejecutar el archivo *install.sh*
  
-    `./install.sh`
+    `$ ./install.sh`
  
 3. Ejecutar sentry con docker-compose
  
-    `docker-compose up -d`
+    `$ docker-compose up -d`
  
-## Enviar logs a fluentd
+## Enviar logs a Fluentd
  
 ### Node Js
  
 Existe la librería [@fluent-org/logger](https://github.com/fluent/fluent-logger-forward-node) que implementa el protocolo forward de fluentd.
  
-`npm install @fluent-org/logger`
+`$ npm install @fluent-org/logger`
  
 Agregar la siguiente directiva en el archivo fluent.conf
  
@@ -197,13 +197,13 @@ const logger = new FluentClient("tag_prefix", {
  
 Docker cuenta con logging driver fluentd, el cual enviará logs del contenedor a un colector fluentd.
  
-`docker run --log-driver=fluentd --log-opt fluentd-address=fluentdhost:24224`
+`$ docker run --log-driver=fluentd --log-opt fluentd-address=fluentdhost:24224`
  
 ### Http
  
 Al crear una directiva source de tipo http se habilitará un API que recibirá los logs.
  
-```
+```aconf
 <source>
   @type http
   port 9880
